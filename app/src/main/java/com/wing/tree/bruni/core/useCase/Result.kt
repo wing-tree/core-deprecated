@@ -1,4 +1,4 @@
-package com.wing.tree.bruni.core.usecase
+package com.wing.tree.bruni.core.useCase
 
 sealed class Result<out R> {
     object Loading : Result<Nothing>()

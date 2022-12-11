@@ -1,4 +1,4 @@
-package com.wing.tree.bruni.core.usecase
+package com.wing.tree.bruni.core.useCase
 
 import javax.inject.Qualifier
 
