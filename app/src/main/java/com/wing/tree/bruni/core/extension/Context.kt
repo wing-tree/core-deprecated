@@ -2,6 +2,8 @@ package com.wing.tree.bruni.core.extension
 
 import android.app.Activity
 import android.app.Service
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
@@ -14,6 +16,46 @@ import com.wing.tree.bruni.core.constant.EMPTY
 import com.wing.tree.bruni.core.constant.ZERO
 
 private const val TAG = "Context"
+
+val Context.colorPrimary: Int @ColorInt get() = with(TypedValue()) {
+    theme.resolveAttribute(
+        com.google.android.material.R.attr.colorPrimary,
+        this,
+        true
+    )
+
+    data
+}
+
+val Context.colorOnPrimary: Int @ColorInt get() = with(TypedValue()) {
+    theme.resolveAttribute(
+        com.google.android.material.R.attr.colorOnPrimary,
+        this,
+        true
+    )
+
+    data
+}
+
+val Context.colorTertiary: Int @ColorInt get() = with(TypedValue()) {
+    theme.resolveAttribute(
+        com.google.android.material.R.attr.colorTertiary,
+        this,
+        true
+    )
+
+    data
+}
+
+val Context.colorOnTertiary: Int @ColorInt get() = with(TypedValue()) {
+    theme.resolveAttribute(
+        com.google.android.material.R.attr.colorOnTertiary,
+        this,
+        true
+    )
+
+    data
+}
 
 val Context.colorSurface: Int
     @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurface)
@@ -37,6 +79,13 @@ val Context.versionName: String get() = try {
 } catch (nameNotFoundException: PackageManager.NameNotFoundException) {
     Log.e(TAG, nameNotFoundException.message ?: EMPTY)
     EMPTY
+}
+
+fun Context.copyToClipboard(label: CharSequence, text: CharSequence) {
+    val clipboardManager = getSystemService(ClipboardManager::class.java)
+    val clipData = ClipData.newPlainText(label, text)
+
+    clipboardManager.setPrimaryClip(clipData)
 }
 
 fun Context.resolveAttribute(resid: Int): Int {
