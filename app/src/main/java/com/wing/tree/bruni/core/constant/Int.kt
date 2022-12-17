@@ -12,5 +12,8 @@ const val EIGHT = 8
 const val NINE = 9
 const val TEN = 10
 
+const val ALPHA_MINIMUM = 0
+const val ALPHA_MAXIMUM = 255
+
 const val ONE_HUNDRED = 100
 const val ONE_THOUSAND = 1000
