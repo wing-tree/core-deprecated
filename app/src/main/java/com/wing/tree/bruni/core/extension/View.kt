@@ -15,6 +15,8 @@ val View.isGone: Boolean get() = visibility == View.GONE
 val View.isInvisible: Boolean get() = visibility == View.INVISIBLE
 val View.isNotVisible: Boolean get() = isVisible.not()
 
+val View.isNotShown: Boolean get() = isShown.not()
+
 fun View.visible() {
     visibility = View.VISIBLE
 }
