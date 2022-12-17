@@ -12,6 +12,8 @@ const val EIGHT = 8
 const val NINE = 9
 const val TEN = 10
 
+const val MINUS_ONE = -1
+
 const val ALPHA_MINIMUM = 0
 const val ALPHA_MAXIMUM = 255
 
