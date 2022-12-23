@@ -127,7 +127,7 @@ fun View.expandVertically(
     }.start()
 }
 
-internal fun View.fadeIn(
+fun View.fadeIn(
     duration: Long,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
@@ -141,7 +141,7 @@ internal fun View.fadeIn(
         .withLayer()
 }
 
-internal fun View.fadeOut(
+fun View.fadeOut(
     duration: Long,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
@@ -183,7 +183,7 @@ fun View.translateLeft(
         .withLayer()
 }
 
-private fun View.translateLeft(
+fun View.translateLeft(
     duration: Long,
     value: Float,
     withStartAction: Runnable? = null,
@@ -211,8 +211,7 @@ fun View.translateRight(
         .withLayer()
 }
 
-
-private fun View.translateRight(
+fun View.translateRight(
     duration: Long,
     value: Float,
     withStartAction: Runnable? = null,
