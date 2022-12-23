@@ -36,8 +36,6 @@ fun View.collapseVertically(
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
     onAnimationRepeat: ((animation: Animator) -> Unit)? = null
 ) {
-    visible()
-
     val measuredHeight: Int = this.measuredHeight
     val listener = object : AnimatorListener {
         override fun onAnimationStart(animation: Animator) {
@@ -45,10 +43,8 @@ fun View.collapseVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            alpha = ZERO.float
             layoutParams.height = ZERO
 
-            gone()
             onAnimationEnd?.invoke(animation)
         }
 
@@ -56,7 +52,6 @@ fun View.collapseVertically(
             alpha = ZERO.float
             layoutParams.height = ZERO
 
-            gone()
             onAnimationCancel?.invoke(animation)
         }
 
@@ -71,7 +66,6 @@ fun View.collapseVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                alpha = animatedValue.div(measuredHeight.float)
                 layoutParams.height = animatedValue
 
                 requestLayout()
@@ -93,22 +87,18 @@ fun View.expandVertically(
 ) {
     layoutParams.height = height
 
-    visible()
-
     val listener = object : AnimatorListener {
         override fun onAnimationStart(animation: Animator) {
             onAnimationStart?.invoke(animation)
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            alpha = ONE.float
             layoutParams.height = value
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            alpha = ONE.float
             layoutParams.height = value
 
             onAnimationCancel?.invoke(animation)
@@ -141,8 +131,6 @@ internal fun View.fadeIn(
     duration: Long,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    visible()
-
     alpha = ZERO.float
 
     return animate()
@@ -155,102 +143,99 @@ internal fun View.fadeIn(
 
 internal fun View.fadeOut(
     duration: Long,
-    onAnimationStart: ((animation: Animator) -> Unit)? = null,
-    onAnimationEnd: ((animation: Animator) -> Unit)? = null,
-    onAnimationCancel: ((animation: Animator) -> Unit)? = null,
-    onAnimationRepeat: ((animation: Animator) -> Unit)? = null
+    listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    this.apply {
-        alpha = ONE.float
+    alpha = ONE.float
 
-        val listener = object : AnimatorListener {
-            override fun onAnimationStart(animation: Animator) {
-                onAnimationStart?.invoke(animation)
-            }
-
-            override fun onAnimationEnd(animation: Animator) {
-                gone()
-                onAnimationEnd?.invoke(animation)
-            }
-
-            override fun onAnimationCancel(animation: Animator) {
-                onAnimationCancel?.invoke(animation)
-            }
-
-            override fun onAnimationRepeat(animation: Animator) {
-                onAnimationRepeat?.invoke(animation)
-            }
-        }
-
-        return@fadeOut animate()
-            .alpha(ZERO.float)
-            .setDuration(duration)
-            .setInterpolator(AccelerateInterpolator())
-            .setListener(listener)
-            .withLayer()
-    }
+    return animate()
+        .alpha(ZERO.float)
+        .setDuration(duration)
+        .setInterpolator(AccelerateInterpolator())
+        .setListener(listener)
+        .withLayer()
 }
 
 fun View.translateDown(
     duration: Long,
     value: Float,
     listener: AnimatorListener? = null
-) {
-    this.apply {
-        translationY = 0.0F
+): ViewPropertyAnimator {
+    translationY = ZERO.float
 
-        animate()
-            .translationY(value)
-            .setDuration(duration)
-            .setListener(listener)
-            .withLayer()
-    }
+    return animate()
+        .setDuration(duration)
+        .setListener(listener)
+        .translationY(value)
+        .withLayer()
 }
 
 fun View.translateLeft(
     duration: Long,
     value: Float,
     listener: AnimatorListener? = null
-) {
-    this.apply {
-        translationX = 0.0F
+): ViewPropertyAnimator {
+    translationX = ZERO.float
 
-        animate()
-            .translationX(-value)
-            .setDuration(duration)
-            .setListener(listener)
-            .withLayer()
-    }
+    return animate()
+        .setDuration(duration)
+        .setListener(listener)
+        .translationX(value.negative)
+        .withLayer()
+}
+
+private fun View.translateLeft(
+    duration: Long,
+    value: Float,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .translationX(value.negative)
+        .withLayer()
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
 }
 
 fun View.translateRight(
     duration: Long,
     value: Float,
     listener: AnimatorListener? = null
-) {
-    this.apply {
-        translationX = 0.0F
+): ViewPropertyAnimator {
+    translationX = ZERO.float
 
-        animate()
-            .translationX(value)
-            .setDuration(duration)
-            .setListener(listener)
-            .withLayer()
-    }
+    return animate()
+        .setDuration(duration)
+        .setListener(listener)
+        .translationX(value)
+        .withLayer()
+}
+
+
+private fun View.translateRight(
+    duration: Long,
+    value: Float,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .translationX(value)
+        .withLayer()
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
 }
 
 fun View.translateUp(
     duration: Long,
     value: Float,
     listener: AnimatorListener? = null
-) {
-    this.apply {
-        translationY = 0.0F
+): ViewPropertyAnimator {
+    translationY = ZERO.float
 
-        animate()
-            .translationY(-value)
-            .setDuration(duration)
-            .setListener(listener)
-            .withLayer()
-    }
+    return animate()
+        .setDuration(duration)
+        .setListener(listener)
+        .translationY(value.negative)
+        .withLayer()
 }
