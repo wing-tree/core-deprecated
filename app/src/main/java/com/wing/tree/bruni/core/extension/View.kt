@@ -155,6 +155,20 @@ fun View.fadeOut(
         .withLayer()
 }
 
+fun View.rotate(
+    duration: Long,
+    value: Float,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .rotation(value)
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
+        .withLayer()
+}
+
 fun View.translateDown(
     duration: Long,
     value: Float,
