@@ -26,3 +26,5 @@ inline fun <reified T> Any?.isOrDefault(defaultValue: T): T {
         defaultValue
     }
 }
+
+inline fun <T> T?.then(block: T?.() -> Unit) = block(this)
