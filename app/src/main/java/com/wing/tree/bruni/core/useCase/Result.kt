@@ -2,11 +2,11 @@ package com.wing.tree.bruni.core.useCase
 
 sealed class Result<out R> {
     object Loading : Result<Nothing>()
-    data class Success<out T: Any>(val data: T) : Result<T>()
+    data class Success<out T>(val data: T) : Result<T>()
     data class Failure(val throwable: Throwable) : Result<Nothing>()
 }
 
-inline fun <R: Any, T: Any> Result<T>.map(transform: (T) -> R): Result<R> {
+inline fun <R, T> Result<T>.map(transform: (T) -> R): Result<R> {
     return when(this) {
         Result.Loading -> Result.Loading
         is Result.Success -> Result.Success(transform(data))
@@ -22,7 +22,7 @@ inline fun <T> Result<T>.onSuccess(action: (value: T) -> Unit): Result<T> {
     return this
 }
 
-fun <T: Any> Result<T>.getOrDefault(defaultValue: T): T {
+fun <T> Result<T>.getOrDefault(defaultValue: T): T {
     return when(this) {
         Result.Loading -> defaultValue
         is Result.Success -> data
@@ -30,7 +30,7 @@ fun <T: Any> Result<T>.getOrDefault(defaultValue: T): T {
     }
 }
 
-fun <T: Any> Result<T>.getOrNull(): T? {
+fun <T> Result<T>.getOrNull(): T? {
     return when(this) {
         Result.Loading -> null
         is Result.Success -> data

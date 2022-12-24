@@ -3,7 +3,7 @@ package com.wing.tree.bruni.core.useCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-abstract class NoParameterCoroutineUseCase<R: Any>(private val coroutineDispatcher: CoroutineDispatcher) {
+abstract class NoParameterCoroutineUseCase<R>(private val coroutineDispatcher: CoroutineDispatcher) {
     suspend operator fun invoke(): Result<R> {
         return try {
             withContext(coroutineDispatcher) {
