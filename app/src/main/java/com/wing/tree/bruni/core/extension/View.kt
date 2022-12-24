@@ -2,6 +2,7 @@ package com.wing.tree.bruni.core.extension
 
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
+import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewPropertyAnimator
@@ -158,11 +159,13 @@ fun View.fadeOut(
 fun View.rotate(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
 ): ViewPropertyAnimator {
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .rotation(value)
         .withStartAction(withStartAction)
         .withEndAction(withEndAction)
@@ -172,12 +175,14 @@ fun View.rotate(
 fun View.translateDown(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     translationY = ZERO.float
 
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .translationY(value)
         .withLayer()
@@ -186,12 +191,14 @@ fun View.translateDown(
 fun View.translateLeft(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     translationX = ZERO.float
 
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .translationX(value.negative)
         .withLayer()
@@ -200,11 +207,13 @@ fun View.translateLeft(
 fun View.translateLeft(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
 ): ViewPropertyAnimator {
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .translationX(value.negative)
         .withLayer()
         .withStartAction(withStartAction)
@@ -214,12 +223,14 @@ fun View.translateLeft(
 fun View.translateRight(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     translationX = ZERO.float
 
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .translationX(value)
         .withLayer()
@@ -228,11 +239,13 @@ fun View.translateRight(
 fun View.translateRight(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
 ): ViewPropertyAnimator {
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .translationX(value)
         .withLayer()
         .withStartAction(withStartAction)
@@ -242,12 +255,14 @@ fun View.translateRight(
 fun View.translateUp(
     duration: Long,
     value: Float,
+    interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     translationY = ZERO.float
 
     return animate()
         .setDuration(duration)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .translationY(value.negative)
         .withLayer()
