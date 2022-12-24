@@ -22,10 +22,10 @@ inline fun <T> Result<T>.onSuccess(action: (value: T) -> Unit): Result<T> {
     return this
 }
 
-fun <T> Result<T>.getOrDefault(defaultValue: T): T {
+fun <T> Result<T?>.getOrDefault(defaultValue: T): T {
     return when(this) {
         Result.Loading -> defaultValue
-        is Result.Success -> data
+        is Result.Success -> data ?: defaultValue
         is Result.Failure -> defaultValue
     }
 }
