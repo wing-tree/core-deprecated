@@ -152,7 +152,7 @@ fun TextView.textFadeIn(
     }.start()
 }
 
-internal fun TextView.textFadeOut(
+fun TextView.textFadeOut(
     duration: Long,
     startDelay: Long = ZERO.long,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
