@@ -100,12 +100,6 @@ fun Context.resolveAttribute(resid: Int): Int {
     return typedValue.data
 }
 
-fun Context.toPx(value: Float) = TypedValue.applyDimension(
-    TypedValue.COMPLEX_UNIT_DIP,
-    value,
-    resources.displayMetrics
-)
-
 inline fun <reified T: Activity> Context.startActivity() {
     startActivity(Intent(this, T::class.java))
 }
