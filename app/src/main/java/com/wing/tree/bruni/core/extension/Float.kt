@@ -8,9 +8,6 @@ import com.wing.tree.bruni.core.constant.ONE_HALF
 import com.wing.tree.bruni.core.constant.TWO
 import com.wing.tree.bruni.core.constant.ZERO
 
-val Float.dp: Int
-    get() = times(Resources.getSystem().displayMetrics.density).plus(ONE_HALF).int
-
 val Float.half: Float get() = div(TWO.float)
 val Float.isNegative: Boolean get() = this < ZERO.float
 val Float.isPositive: Boolean get() = this > ZERO.float
@@ -19,6 +16,14 @@ val Float.quarter get() = div(FOUR.float)
 
 val Float?.isZero: Boolean get() = this == ZERO.float
 val Float?.notZero: Boolean get() = isZero.not()
+
+fun Float.toDp(context: Context): Float {
+    return times(context.resources.displayMetrics.density).plus(ONE_HALF)
+}
+
+fun Float.toDp(resources: Resources): Float {
+    return times(resources.displayMetrics.density).plus(ONE_HALF)
+}
 
 fun Float.toPx(context: Context) = TypedValue.applyDimension(
     TypedValue.COMPLEX_UNIT_DIP,
