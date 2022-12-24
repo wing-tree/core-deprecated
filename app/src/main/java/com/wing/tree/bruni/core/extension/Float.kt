@@ -4,8 +4,12 @@ import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
 import com.wing.tree.bruni.core.constant.FOUR
+import com.wing.tree.bruni.core.constant.ONE_HALF
 import com.wing.tree.bruni.core.constant.TWO
 import com.wing.tree.bruni.core.constant.ZERO
+
+val Float.dp: Int
+    get() = times(Resources.getSystem().displayMetrics.density).plus(ONE_HALF).int
 
 val Float.half: Float get() = div(TWO.float)
 val Float.isNegative: Boolean get() = this < ZERO.float

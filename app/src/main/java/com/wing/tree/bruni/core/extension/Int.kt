@@ -1,9 +1,10 @@
 package com.wing.tree.bruni.core.extension
 
-import com.wing.tree.bruni.core.constant.FOUR
-import com.wing.tree.bruni.core.constant.ONE
-import com.wing.tree.bruni.core.constant.TWO
-import com.wing.tree.bruni.core.constant.ZERO
+import android.content.res.Resources
+import com.wing.tree.bruni.core.constant.*
+
+val Int.dp: Int
+    get() = times(Resources.getSystem().displayMetrics.density).plus(ONE_HALF).int
 
 val Int.half: Int get() = div(TWO)
 val Int.isEven: Boolean get() = rem(TWO) == ZERO
