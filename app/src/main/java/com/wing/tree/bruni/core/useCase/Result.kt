@@ -37,3 +37,19 @@ fun <T> Result<T>.getOrNull(): T? {
         is Result.Failure -> null
     }
 }
+
+fun <T> Result<List<T?>>.firstOrDefault(defaultValue: T): T {
+    return when(this) {
+        Result.Loading -> defaultValue
+        is Result.Success -> data.firstOrNull() ?: defaultValue
+        is Result.Failure -> defaultValue
+    }
+}
+
+fun <T> Result<List<T>>.firstOrNull(): T? {
+    return when(this) {
+        Result.Loading -> null
+        is Result.Success -> data.firstOrNull()
+        is Result.Failure -> null
+    }
+}
