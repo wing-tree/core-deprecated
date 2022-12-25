@@ -178,8 +178,6 @@ fun View.translateDown(
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    translationY = ZERO.float
-
     return animate()
         .setDuration(duration)
         .setInterpolator(interpolator)
@@ -194,8 +192,6 @@ fun View.translateLeft(
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    translationX = ZERO.float
-
     return animate()
         .setDuration(duration)
         .setInterpolator(interpolator)
@@ -226,8 +222,6 @@ fun View.translateRight(
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    translationX = ZERO.float
-
     return animate()
         .setDuration(duration)
         .setInterpolator(interpolator)
@@ -258,8 +252,6 @@ fun View.translateUp(
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
-    translationY = ZERO.float
-
     return animate()
         .setDuration(duration)
         .setInterpolator(interpolator)
