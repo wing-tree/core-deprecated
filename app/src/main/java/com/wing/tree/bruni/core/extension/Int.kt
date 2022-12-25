@@ -2,6 +2,7 @@ package com.wing.tree.bruni.core.extension
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.TypedValue
 import com.wing.tree.bruni.core.constant.*
 
 val Int.half: Int get() = div(TWO)
@@ -23,3 +24,15 @@ fun Int.toDp(context: Context): Int {
 fun Int.toDp(resources: Resources): Int {
     return times(resources.displayMetrics.density).plus(ONE_HALF).int
 }
+
+fun Int.toPx(context: Context) = TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP,
+    float,
+    context.resources.displayMetrics
+)
+
+fun Int.toPx(resources: Resources) = TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP,
+    float,
+    resources.displayMetrics
+)
