@@ -168,6 +168,38 @@ fun View.rotate(
         .withLayer()
 }
 
+fun View.rotateX(
+    duration: Long,
+    value: Float,
+    interpolator: TimeInterpolator? = null,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .rotationX(value)
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
+        .withLayer()
+}
+
+fun View.rotateY(
+    duration: Long,
+    value: Float,
+    interpolator: TimeInterpolator? = null,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .rotationY(value)
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
+        .withLayer()
+}
+
 fun View.translateDown(
     duration: Long,
     value: Float,
