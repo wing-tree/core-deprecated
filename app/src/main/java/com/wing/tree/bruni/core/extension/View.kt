@@ -6,8 +6,6 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewPropertyAnimator
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.core.view.isVisible
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
@@ -74,7 +72,6 @@ fun View.collapseVertically(
         }
 
         this.duration = duration
-        interpolator = DecelerateInterpolator()
     }.start()
 }
 
@@ -124,7 +121,6 @@ fun View.expandVertically(
         }
 
         this.duration = duration
-        interpolator = DecelerateInterpolator()
     }.start()
 }
 
@@ -137,7 +133,7 @@ fun View.fadeIn(
     return animate()
         .alpha(ONE.float)
         .setDuration(duration)
-        .setInterpolator(DecelerateInterpolator())
+        .setInterpolator(context.decelerateQuadInterpolator)
         .setListener(listener)
         .withLayer()
 }
@@ -151,7 +147,7 @@ fun View.fadeOut(
     return animate()
         .alpha(ZERO.float)
         .setDuration(duration)
-        .setInterpolator(AccelerateInterpolator())
+        .setInterpolator(context.accelerateQuadInterpolator)
         .setListener(listener)
         .withLayer()
 }
