@@ -11,6 +11,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import android.util.TypedValue
+import android.view.animation.AnimationUtils
+import android.view.animation.Interpolator
 import androidx.annotation.ColorInt
 import com.wing.tree.bruni.core.constant.EMPTY
 import com.wing.tree.bruni.core.constant.ZERO
@@ -60,8 +62,32 @@ val Context.colorOnTertiary: Int @ColorInt get() = with(TypedValue()) {
 val Context.colorSurface: Int
     @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurface)
 
+val Context.colorOnSurface: Int
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurface)
+
 val Context.colorSurfaceVariant: Int
     @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant)
+
+val Context.colorOnSurfaceVariant: Int
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant)
+
+val Context.accelerateCubicInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_cubic)
+
+val Context.accelerateQuadInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_quad)
+
+val Context.accelerateQuintInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_quint)
+
+val Context.decelerateCubicInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_cubic)
+
+val Context.decelerateQuadInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_quad)
+
+val Context.decelerateQuintInterpolator: Interpolator
+    get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_quint)
 
 val Context.packageInfo: PackageInfo get() = with(packageManager) {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
