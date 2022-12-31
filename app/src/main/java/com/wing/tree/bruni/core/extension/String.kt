@@ -7,3 +7,5 @@ val String.flagEmoji: String
 
         return String(Character.toChars(first)).plus(String(Character.toChars(second)))
     }
+
+operator fun String.get(range: IntRange) = substring(range.first, range.last.inc())

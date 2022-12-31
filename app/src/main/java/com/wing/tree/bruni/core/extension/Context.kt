@@ -3,6 +3,7 @@ package com.wing.tree.bruni.core.extension
 import android.app.Activity
 import android.app.Service
 import android.content.ClipData
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -13,7 +14,8 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
-import androidx.annotation.ColorInt
+import androidx.annotation.*
+import androidx.core.content.res.ResourcesCompat
 import com.wing.tree.bruni.core.constant.EMPTY
 import com.wing.tree.bruni.core.constant.ZERO
 
@@ -107,11 +109,29 @@ val Context.versionName: String get() = try {
     EMPTY
 }
 
-fun Context.copyToClipboard(label: CharSequence, text: CharSequence) {
+fun Context.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(this, id)
+fun Context.dimen(@DimenRes id: Int) = resources.getDimension(id)
+fun Context.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
+fun Context.font(@FontRes id: Int) = ResourcesCompat.getFont(this, id)
+
+fun Context.copyPlainTextToClipboard(text: CharSequence) {
     val clipboardManager = getSystemService(ClipboardManager::class.java)
-    val clipData = ClipData.newPlainText(label, text)
+    val clipData = ClipData.newPlainText(MIMETYPE_TEXT_PLAIN, text)
 
     clipboardManager.setPrimaryClip(clipData)
+}
+
+fun Context.pastePlanTextFromClipboard(): CharSequence? {
+    val clipboardManager = getSystemService(ClipboardManager::class.java)
+    val hasPrimaryClip = clipboardManager.hasPrimaryClip()
+    val hasMimeType = clipboardManager.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN) ?: false
+    val primaryClip = clipboardManager.primaryClip
+
+    return if (hasPrimaryClip.and(hasMimeType)) {
+        primaryClip?.getItemAt(ZERO)?.text
+    } else {
+        null
+    }
 }
 
 fun Context.resolveAttribute(resid: Int): Int {

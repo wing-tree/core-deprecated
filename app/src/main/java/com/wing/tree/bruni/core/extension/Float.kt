@@ -14,6 +14,20 @@ val Float.isPositive: Boolean get() = this > ZERO.float
 val Float.negative: Float get() = -this
 val Float.quarter get() = div(FOUR.float)
 
+val Float.dp: Float
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this,
+        Resources.getSystem().displayMetrics
+    )
+
+val Float.sp: Float
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this,
+        Resources.getSystem().displayMetrics
+    )
+
 val Float?.isZero: Boolean get() = this == ZERO.float
 val Float?.notZero: Boolean get() = isZero.not()
 

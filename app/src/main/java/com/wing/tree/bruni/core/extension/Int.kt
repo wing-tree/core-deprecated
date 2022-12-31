@@ -17,6 +17,20 @@ val Int?.isOne: Boolean get() = this == ONE
 val Int?.isZero: Boolean get() = this == ZERO
 val Int?.notZero: Boolean get() = isZero.not()
 
+val Int.dp
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        float,
+        Resources.getSystem().displayMetrics
+    )
+
+val Int.sp
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        float,
+        Resources.getSystem().displayMetrics
+    )
+
 fun Int.toDp(context: Context): Int {
     return times(context.resources.displayMetrics.density).plus(ONE_HALF).int
 }
