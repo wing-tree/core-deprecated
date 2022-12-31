@@ -1,5 +1,6 @@
 package com.wing.tree.bruni.core.extension
 
+val Number.char: Char get() = toChar()
 val Number.double: Double get() = toDouble()
 val Number.float: Float get() = toFloat()
 val Number.int: Int get() = toInt()
