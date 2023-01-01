@@ -16,6 +16,14 @@ val View.isNotVisible: Boolean get() = isVisible.not()
 
 val View.isNotShown: Boolean get() = isShown.not()
 
+fun View.enable() {
+    isEnabled = true
+}
+
+fun View.disable() {
+    isEnabled = false
+}
+
 fun View.visible() {
     visibility = View.VISIBLE
 }
