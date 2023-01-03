@@ -6,12 +6,14 @@ import android.util.TypedValue
 import com.wing.tree.bruni.core.constant.*
 
 val Int.half: Int get() = div(TWO)
+val Int.hundreds: Int get() = times(ONE_HUNDRED)
 val Int.isEven: Boolean get() = rem(TWO) == ZERO
 val Int.isOdd: Boolean get() = isEven.not()
 val Int.isNegative: Boolean get() = this < ZERO
 val Int.isPositive: Boolean get() = this > ZERO
 val Int.negative get() = -this
 val Int.quarter get() = div(FOUR)
+val Int.thousands: Int get() = times(ONE_THOUSAND)
 
 val Int?.isOne: Boolean get() = this == ONE
 val Int?.isZero: Boolean get() = this == ZERO
