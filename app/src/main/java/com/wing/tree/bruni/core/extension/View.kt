@@ -222,6 +222,22 @@ fun View.translateDown(
         .withLayer()
 }
 
+fun View.translateDown(
+    duration: Long,
+    value: Float,
+    interpolator: TimeInterpolator? = null,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .translationY(value)
+        .withLayer()
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
+}
+
 fun View.translateLeft(
     duration: Long,
     value: Float,
@@ -294,4 +310,20 @@ fun View.translateUp(
         .setListener(listener)
         .translationY(value.negative)
         .withLayer()
+}
+
+fun View.translateUp(
+    duration: Long,
+    value: Float,
+    interpolator: TimeInterpolator? = null,
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+): ViewPropertyAnimator {
+    return animate()
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .translationY(value.negative)
+        .withLayer()
+        .withStartAction(withStartAction)
+        .withEndAction(withEndAction)
 }
