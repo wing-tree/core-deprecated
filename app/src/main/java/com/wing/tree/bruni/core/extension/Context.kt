@@ -134,6 +134,19 @@ fun Context.pastePlanTextFromClipboard(): CharSequence? {
     }
 }
 
+fun Context.pasteTextFromClipboard(): CharSequence? {
+    val clipboardManager = getSystemService(ClipboardManager::class.java)
+    val hasPrimaryClip = clipboardManager.hasPrimaryClip()
+    val primaryClip = clipboardManager.primaryClip
+    val item  = primaryClip?.getItemAt(ZERO)
+
+    return if (hasPrimaryClip) {
+        item?.coerceToText(this)
+    } else {
+        null
+    }
+}
+
 fun Context.resolveAttribute(resid: Int): Int {
     val typedValue = TypedValue()
 
