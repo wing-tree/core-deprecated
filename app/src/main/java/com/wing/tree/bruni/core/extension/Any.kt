@@ -7,7 +7,7 @@ val Any?.string: String get() = toString()
 
 @OptIn(ExperimentalContracts::class)
 fun Any?.isNull(): Boolean {
-    contract { returns(true) implies (this@isNull == null) }
+    contract { returns(false) implies (this@isNull != null) }
 
     return this == null
 }
