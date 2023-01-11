@@ -134,6 +134,7 @@ fun View.expandVertically(
 
 fun View.fadeIn(
     duration: Long,
+    interpolator: TimeInterpolator? = context.decelerateQuadInterpolator,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     alpha = ZERO.float
@@ -141,13 +142,14 @@ fun View.fadeIn(
     return animate()
         .alpha(ONE.float)
         .setDuration(duration)
-        .setInterpolator(context.decelerateQuadInterpolator)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .withLayer()
 }
 
 fun View.fadeOut(
     duration: Long,
+    interpolator: TimeInterpolator? = context.accelerateQuadInterpolator,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
     alpha = ONE.float
@@ -155,7 +157,7 @@ fun View.fadeOut(
     return animate()
         .alpha(ZERO.float)
         .setDuration(duration)
-        .setInterpolator(context.accelerateQuadInterpolator)
+        .setInterpolator(interpolator)
         .setListener(listener)
         .withLayer()
 }
