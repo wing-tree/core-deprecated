@@ -73,6 +73,9 @@ val Context.colorSurfaceVariant: Int
 val Context.colorOnSurfaceVariant: Int
     @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant)
 
+val Context.colorOnBackground: Int
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnBackground)
+
 val Context.accelerateCubicInterpolator: Interpolator
     get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_cubic)
 
