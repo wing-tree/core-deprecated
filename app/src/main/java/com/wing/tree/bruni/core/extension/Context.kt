@@ -21,6 +21,10 @@ import com.wing.tree.bruni.core.constant.ZERO
 
 private const val TAG = "Context"
 
+val Context.configShortAnimTime: Int get() = resources.getInteger(android.R.integer.config_shortAnimTime)
+val Context.configMediumAnimTime: Int get() = resources.getInteger(android.R.integer.config_mediumAnimTime)
+val Context.configLongAnimTime: Int get() = resources.getInteger(android.R.integer.config_longAnimTime)
+
 val Context.colorPrimary: Int @ColorInt get() = with(TypedValue()) {
     theme.resolveAttribute(
         com.google.android.material.R.attr.colorPrimary,
@@ -116,6 +120,7 @@ fun Context.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(this, id)
 fun Context.dimen(@DimenRes id: Int) = resources.getDimension(id)
 fun Context.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
 fun Context.font(@FontRes id: Int) = ResourcesCompat.getFont(this, id)
+fun Context.integer(@IntegerRes id: Int) = resources.getInteger(id)
 
 fun Context.copyPlainTextToClipboard(text: CharSequence) {
     val clipboardManager = getSystemService(ClipboardManager::class.java)
