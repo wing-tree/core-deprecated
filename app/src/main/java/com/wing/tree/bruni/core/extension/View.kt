@@ -6,6 +6,7 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewPropertyAnimator
+import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
@@ -81,6 +82,34 @@ fun View.collapseVertically(
 
         this.duration = duration
     }.start()
+}
+
+fun View.crossFade(
+    target: View,
+    duration: Long,
+    interpolator: TimeInterpolator? = LinearInterpolator(),
+    withStartAction: Runnable? = null,
+    withEndAction: Runnable? = null
+) {
+    target.alpha = ZERO.float
+    target.visibility = View.VISIBLE
+
+    target.animate()
+        .alpha(ONE.float)
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .withLayer()
+
+    animate()
+        .alpha(ZERO.float)
+        .setDuration(duration)
+        .setInterpolator(interpolator)
+        .withStartAction(withStartAction)
+        .withEndAction {
+            invisible()
+            withEndAction?.run()
+        }
+        .withLayer()
 }
 
 fun View.expandVertically(
