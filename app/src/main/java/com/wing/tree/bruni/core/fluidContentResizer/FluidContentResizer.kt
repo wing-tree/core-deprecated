@@ -1,12 +1,16 @@
 package com.wing.tree.bruni.core.fluidContentResizer
 
 import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.view.View
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
-object FluidContentResizer {
+class FluidContentResizer(
+    private val duration: Long = 300L,
+    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator()
+) {
     private var valueAnimator: ValueAnimator? = null
 
     fun registerActivity(
@@ -44,7 +48,8 @@ object FluidContentResizer {
             previousContentHeight,
             currentContentHeight
         ).apply {
-            interpolator = FastOutSlowInInterpolator()
+            duration = this@FluidContentResizer.duration
+            interpolator = this@FluidContentResizer.interpolator
         }
 
         valueAnimator?.let { valueAnimator ->
