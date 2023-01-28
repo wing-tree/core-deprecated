@@ -6,18 +6,38 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Build
+import android.text.TextPaint
 import android.util.Log
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
-import com.wing.tree.bruni.core.constant.ALPHA_MAXIMUM
-import com.wing.tree.bruni.core.constant.ALPHA_MINIMUM
-import com.wing.tree.bruni.core.constant.EMPTY
-import com.wing.tree.bruni.core.constant.ZERO
+import com.wing.tree.bruni.core.constant.*
 
 private const val TAG = "TextView"
+
+private fun TextView.lineCount(text: CharSequence, textSize: Float, lineCount: Int = ONE): Int {
+    val paint = TextPaint(paint).apply {
+        this.textSize = textSize
+    }
+
+    val paddingHorizontal = paddingStart.plus(paddingEnd)
+    val maxWidth = width.minus(paddingHorizontal).float
+    val n = paint.breakText(text, ZERO, text.length, true, maxWidth, null)
+    val subtext = text.subSequence(n, text.length)
+
+    return if (subtext.isNotEmpty()) {
+        lineCount(subtext, textSize, lineCount.inc())
+    } else {
+        lineCount
+    }
+}
+
+fun TextView.lineCount(textSize: Float): Int {
+    return lineCount(text, textSize, ONE)
+}
 
 @SuppressLint("DiscouragedPrivateApi", "SoonBlockedPrivateApi")
 fun TextView.setCursorDrawableColor(@ColorInt color: Int) {
@@ -200,8 +220,8 @@ fun TextView.textFadeOut(
 
 fun TextView.textSizeAnimator(
     value: Float,
-    duration: Long = 120L,
-    interpolator: TimeInterpolator = context.decelerateQuadInterpolator
+    duration: Long = ONE_HUNDRED.milliseconds,
+    interpolator: TimeInterpolator = LinearInterpolator()
 ): Animator {
     val propertyName = "textSize"
     val scaledDensity = displayMetrics.scaledDensity
