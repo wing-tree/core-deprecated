@@ -8,7 +8,7 @@ import android.view.View
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
 class FluidContentResizer(
-    private val duration: Long = 300L,
+    private val duration: Long = DURATION,
     private val interpolator: TimeInterpolator = FastOutSlowInInterpolator()
 ) {
     private var valueAnimator: ValueAnimator? = null
@@ -70,5 +70,9 @@ class FluidContentResizer(
 
         layoutParameter.height = height
         layoutParams = layoutParameter
+    }
+
+    companion object {
+        const val DURATION = 300L
     }
 }
