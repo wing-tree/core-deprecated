@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.TypedArray
 import android.os.Build
 import android.util.Log
 import android.util.TypedValue
@@ -65,20 +66,30 @@ val Context.colorOnTertiary: Int @ColorInt get() = with(TypedValue()) {
     data
 }
 
+val Context.actionBarSize: Int get() = run {
+    val styledAttributes: TypedArray = theme.obtainStyledAttributes(
+        intArrayOf(android.R.attr.actionBarSize)
+    )
+
+    return styledAttributes.getDimension(ZERO, ZERO.float).also {
+        styledAttributes.recycle()
+    }.int
+}
+
 val Context.colorSurface: Int
-    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurface)
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurface).data
 
 val Context.colorOnSurface: Int
-    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurface)
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurface).data
 
 val Context.colorSurfaceVariant: Int
-    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant)
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorSurfaceVariant).data
 
 val Context.colorOnSurfaceVariant: Int
-    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant)
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant).data
 
 val Context.colorOnBackground: Int
-    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnBackground)
+    @ColorInt get() = resolveAttribute(com.google.android.material.R.attr.colorOnBackground).data
 
 val Context.accelerateCubicInterpolator: Interpolator
     get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_cubic)
@@ -155,7 +166,7 @@ fun Context.pasteTextFromClipboard(): CharSequence? {
     }
 }
 
-fun Context.resolveAttribute(resid: Int): Int {
+fun Context.resolveAttribute(resid: Int): TypedValue {
     val typedValue = TypedValue()
 
     theme.resolveAttribute(
@@ -164,7 +175,7 @@ fun Context.resolveAttribute(resid: Int): Int {
         true
     )
 
-    return typedValue.data
+    return typedValue
 }
 
 inline fun <reified T: Activity> Context.startActivity() {
