@@ -44,8 +44,8 @@ fun View.gone() {
 }
 
 fun View.collapseVertically(
-    duration: Long,
     value: Int,
+    duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -182,8 +182,8 @@ fun View.crossFade(
 }
 
 fun View.expandVertically(
-    duration: Long,
     value: Int,
+    duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
     withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
