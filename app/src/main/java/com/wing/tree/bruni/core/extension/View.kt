@@ -46,6 +46,7 @@ fun View.gone() {
 fun View.collapseVertically(
     duration: Long,
     value: Int,
+    interpolator: TimeInterpolator = LinearInterpolator(),
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -87,11 +88,13 @@ fun View.collapseVertically(
         }
 
         this.duration = duration
+        this.interpolator = interpolator
     }.start()
 }
 
 fun View.collapseVertically(
     duration: Long,
+    interpolator: TimeInterpolator = LinearInterpolator(),
     withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -146,6 +149,7 @@ fun View.collapseVertically(
         }
 
         this.duration = duration
+        this.interpolator = interpolator
     }.start()
 }
 
@@ -180,6 +184,7 @@ fun View.crossFade(
 fun View.expandVertically(
     duration: Long,
     value: Int,
+    interpolator: TimeInterpolator = LinearInterpolator(),
     withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -235,6 +240,7 @@ fun View.expandVertically(
         }
 
         this.duration = duration
+        this.interpolator = interpolator
     }.start()
 }
 
