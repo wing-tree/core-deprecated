@@ -12,6 +12,9 @@ const val EIGHT = 8
 const val NINE = 9
 const val TEN = 10
 
+const val THIRTY_ONE = 31
+const val SIXTY_FOUR = 64
+
 const val MINUS_ONE = -1
 
 const val ALPHA_MINIMUM = 0
