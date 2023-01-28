@@ -33,6 +33,30 @@ val Int.sp
         Resources.getSystem().displayMetrics
     )
 
+fun Int.safeDiv(other: Float): Float {
+    return if (other.isZero) {
+        this.float
+    } else {
+        div(other)
+    }
+}
+
+fun Int.safeDiv(other: Int): Int {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
+
+fun Int.safeDiv(other: Long): Long {
+    return if (other.isZero) {
+        this.long
+    } else {
+        div(other)
+    }
+}
+
 fun Int.toDp(context: Context): Int {
     return times(context.resources.displayMetrics.density).plus(ONE_HALF).int
 }

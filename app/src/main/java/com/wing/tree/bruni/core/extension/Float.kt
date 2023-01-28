@@ -30,6 +30,30 @@ val Float.sp: Float
 val Float?.isZero: Boolean get() = this == ZERO.float
 val Float?.notZero: Boolean get() = isZero.not()
 
+fun Float.safeDiv(other: Float): Float {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
+
+fun Float.safeDiv(other: Int): Float {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
+
+fun Float.safeDiv(other: Long): Float {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
+
 fun Float.toDp(context: Context): Float {
     return times(context.resources.displayMetrics.density).plus(ONE_HALF)
 }

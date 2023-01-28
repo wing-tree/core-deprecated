@@ -13,3 +13,27 @@ val Long.thousands: Long get() = times(ONE_THOUSAND.long)
 
 val Long?.isZero: Boolean get() = this == ZERO.long
 val Long?.notZero: Boolean get() = isZero.not()
+
+fun Long.safeDiv(other: Float): Float {
+    return if (other.isZero) {
+        this.float
+    } else {
+        div(other)
+    }
+}
+
+fun Long.safeDiv(other: Int): Long {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
+
+fun Long.safeDiv(other: Long): Long {
+    return if (other.isZero) {
+        this
+    } else {
+        div(other)
+    }
+}
