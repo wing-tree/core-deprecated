@@ -4,12 +4,18 @@ import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
+
+val View.displayMetrics: DisplayMetrics get() = resources.displayMetrics
+val View.density: Float get() = displayMetrics.density
+val View.densityDpi: Int get() = displayMetrics.densityDpi
+val View.scaledDensity: Float get() = displayMetrics.scaledDensity
 
 val View.isGone: Boolean get() = visibility == View.GONE
 val View.isInvisible: Boolean get() = visibility == View.INVISIBLE
