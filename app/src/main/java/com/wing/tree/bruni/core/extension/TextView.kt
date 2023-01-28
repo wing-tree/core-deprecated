@@ -1,6 +1,8 @@
 package com.wing.tree.bruni.core.extension
 
 import android.animation.Animator
+import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Build
@@ -194,4 +196,23 @@ fun TextView.textFadeOut(
         this.startDelay = startDelay
         interpolator = AccelerateInterpolator()
     }.start()
+}
+
+fun TextView.textSizeAnimator(
+    value: Float,
+    duration: Long = 120L,
+    interpolator: TimeInterpolator = context.decelerateQuadInterpolator
+): Animator {
+    val propertyName = "textSize"
+    val scaledDensity = displayMetrics.scaledDensity
+
+    return ObjectAnimator.ofFloat(
+        this,
+        propertyName,
+        textSize.div(scaledDensity),
+        value.div(scaledDensity)
+    ).apply {
+        this.duration = duration
+        this.interpolator = interpolator
+    }
 }
