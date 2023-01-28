@@ -45,6 +45,7 @@ fun View.gone() {
 
 fun View.collapseVertically(
     duration: Long,
+    value: Int,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -57,13 +58,67 @@ fun View.collapseVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
+            layoutParams.height = value
+
+            onAnimationEnd?.invoke(animation)
+        }
+
+        override fun onAnimationCancel(animation: Animator) {
+            layoutParams.height = value
+
+            onAnimationCancel?.invoke(animation)
+        }
+
+        override fun onAnimationRepeat(animation: Animator) {
+            onAnimationRepeat?.invoke(animation)
+        }
+    }
+
+    ValueAnimator.ofInt(measuredHeight, value).apply {
+        addListener(listener)
+        addUpdateListener {
+            val animatedValue = it.animatedValue
+
+            if (animatedValue is Int) {
+                layoutParams.height = animatedValue
+
+                requestLayout()
+            }
+        }
+
+        this.duration = duration
+    }.start()
+}
+
+fun View.collapseVertically(
+    duration: Long,
+    withAlpha: Boolean = false,
+    onAnimationStart: ((animation: Animator) -> Unit)? = null,
+    onAnimationEnd: ((animation: Animator) -> Unit)? = null,
+    onAnimationCancel: ((animation: Animator) -> Unit)? = null,
+    onAnimationRepeat: ((animation: Animator) -> Unit)? = null
+) {
+    val measuredHeight: Int = this.measuredHeight
+    val listener = object : AnimatorListener {
+        override fun onAnimationStart(animation: Animator) {
+            onAnimationStart?.invoke(animation)
+        }
+
+        override fun onAnimationEnd(animation: Animator) {
+            if (withAlpha) {
+                alpha = ZERO.float
+            }
+
             layoutParams.height = ZERO
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            alpha = ZERO.float
+            if (withAlpha) {
+                alpha = ZERO.float
+            }
+
             layoutParams.height = ZERO
 
             onAnimationCancel?.invoke(animation)
@@ -80,6 +135,10 @@ fun View.collapseVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
+                if (withAlpha) {
+                    alpha = animatedValue.safeDiv(measuredHeight.float)
+                }
+
                 layoutParams.height = animatedValue
 
                 requestLayout()
@@ -121,6 +180,7 @@ fun View.crossFade(
 fun View.expandVertically(
     duration: Long,
     value: Int,
+    withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -134,12 +194,20 @@ fun View.expandVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
+            if (withAlpha) {
+                alpha = ONE.float
+            }
+
             layoutParams.height = value
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
+            if (withAlpha) {
+                alpha = ONE.float
+            }
+
             layoutParams.height = value
 
             onAnimationCancel?.invoke(animation)
@@ -156,7 +224,10 @@ fun View.expandVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                alpha = animatedValue.div(value.float)
+                if (withAlpha) {
+                    alpha = animatedValue.safeDiv(value.float)
+                }
+
                 layoutParams.height = animatedValue
 
                 requestLayout()
