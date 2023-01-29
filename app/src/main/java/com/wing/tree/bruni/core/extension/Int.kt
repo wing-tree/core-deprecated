@@ -12,6 +12,8 @@ val Int.isOdd: Boolean get() = isEven.not()
 val Int.isNegative: Boolean get() = this < ZERO
 val Int.isPositive: Boolean get() = this > ZERO
 val Int.negative get() = -this
+val Int.notNegative: Boolean get() = this >= ZERO
+val Int.notPositive: Boolean get() = this <= ZERO
 val Int.quarter get() = div(FOUR)
 val Int.thousands: Int get() = times(ONE_THOUSAND)
 

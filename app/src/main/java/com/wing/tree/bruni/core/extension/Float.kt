@@ -10,6 +10,8 @@ val Float.hundreds: Float get() = times(ONE_HUNDRED.float)
 val Float.isNegative: Boolean get() = this < ZERO.float
 val Float.isPositive: Boolean get() = this > ZERO.float
 val Float.negative: Float get() = -this
+val Float.notNegative: Boolean get() = this >= ZERO.float
+val Float.notPositive: Boolean get() = this <= ZERO.float
 val Float.quarter get() = div(FOUR.float)
 val Float.thousands: Float get() = times(ONE_THOUSAND.float)
 
