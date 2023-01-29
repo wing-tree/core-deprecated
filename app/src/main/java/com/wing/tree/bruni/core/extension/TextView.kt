@@ -19,6 +19,10 @@ import com.wing.tree.bruni.core.constant.*
 private const val TAG = "TextView"
 
 private fun TextView.lineCount(text: CharSequence, textSize: Float, lineCount: Int = ONE): Int {
+    if (width.notPositive) {
+        return ONE
+    }
+
     val paint = TextPaint(paint).apply {
         this.textSize = textSize
     }
@@ -27,6 +31,10 @@ private fun TextView.lineCount(text: CharSequence, textSize: Float, lineCount: I
     val maxWidth = width.minus(paddingHorizontal).float
     val n = paint.breakText(text, ZERO, text.length, true, maxWidth, null)
     val subtext = text.subSequence(n, text.length)
+
+    if (text == subtext) {
+        return lineCount
+    }
 
     return if (subtext.isNotEmpty()) {
         lineCount(subtext, textSize, lineCount.inc())
