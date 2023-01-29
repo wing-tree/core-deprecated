@@ -5,6 +5,8 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.view.View
+import android.view.ViewGroup.LayoutParams
+import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
 class FluidContentResizer(
@@ -40,7 +42,7 @@ class FluidContentResizer(
         val currentContentHeight = inputMethodVisibilityChangedEvent.currentContentHeight
         val previousContentHeight = inputMethodVisibilityChangedEvent.previousContentHeight
 
-        content.setHeight(previousContentHeight)
+        content.updateHeight(previousContentHeight)
 
         valueAnimator?.cancel()
 
@@ -56,7 +58,7 @@ class FluidContentResizer(
             valueAnimator.addUpdateListener {
                 with(it.animatedValue) {
                     if (this is Int) {
-                        content.setHeight(this)
+                        content.updateHeight(this)
                     }
                 }
             }
@@ -65,11 +67,10 @@ class FluidContentResizer(
         }
     }
 
-    private fun View.setHeight(height: Int) {
-        val layoutParameter = this.layoutParams
-
-        layoutParameter.height = height
-        layoutParams = layoutParameter
+    private fun View.updateHeight(height: Int) {
+        updateLayoutParams<LayoutParams> {
+            this.height = height
+        }
     }
 
     companion object {
