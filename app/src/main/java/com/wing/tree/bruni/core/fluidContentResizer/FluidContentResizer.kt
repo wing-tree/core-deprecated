@@ -4,10 +4,8 @@ import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.app.Activity
-import android.view.View
-import android.view.ViewGroup.LayoutParams
-import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import com.wing.tree.bruni.core.extension.updateHeight
 
 class FluidContentResizer(
     private val duration: Long = DURATION,
@@ -64,12 +62,6 @@ class FluidContentResizer(
             }
 
             valueAnimator.start()
-        }
-    }
-
-    private fun View.updateHeight(height: Int) {
-        updateLayoutParams<LayoutParams> {
-            this.height = height
         }
     }
 
