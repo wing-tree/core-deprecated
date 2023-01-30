@@ -6,9 +6,11 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
 import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
 
@@ -95,7 +97,6 @@ fun View.collapseVertically(
 fun View.collapseVertically(
     duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
-    withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -108,20 +109,14 @@ fun View.collapseVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            if (withAlpha) {
-                alpha = ZERO.float
-            }
-
+            alpha = ZERO.float
             layoutParams.height = ZERO
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            if (withAlpha) {
-                alpha = ZERO.float
-            }
-
+            alpha = ZERO.float
             layoutParams.height = ZERO
 
             onAnimationCancel?.invoke(animation)
@@ -138,10 +133,7 @@ fun View.collapseVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                if (withAlpha) {
-                    alpha = animatedValue.safeDiv(measuredHeight.float)
-                }
-
+                alpha = animatedValue.safeDiv(measuredHeight.float)
                 layoutParams.height = animatedValue
 
                 requestLayout()
@@ -185,7 +177,6 @@ fun View.expandVertically(
     value: Int,
     duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
-    withAlpha: Boolean = false,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -199,20 +190,14 @@ fun View.expandVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            if (withAlpha) {
-                alpha = ONE.float
-            }
-
+            alpha = ONE.float
             layoutParams.height = value
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            if (withAlpha) {
-                alpha = ONE.float
-            }
-
+            alpha = ONE.float
             layoutParams.height = value
 
             onAnimationCancel?.invoke(animation)
@@ -229,10 +214,7 @@ fun View.expandVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                if (withAlpha) {
-                    alpha = animatedValue.safeDiv(value.float)
-                }
-
+                alpha = animatedValue.safeDiv(value.float)
                 layoutParams.height = animatedValue
 
                 requestLayout()
@@ -440,4 +422,16 @@ fun View.translateUp(
         .withLayer()
         .withStartAction(withStartAction)
         .withEndAction(withEndAction)
+}
+
+fun View.updateHeight(height: Int) {
+    updateLayoutParams<ViewGroup.LayoutParams> {
+        this.height = height
+    }
+}
+
+fun View.updateWidth(width: Int) {
+    updateLayoutParams<ViewGroup.LayoutParams> {
+        this.width = width
+    }
 }
