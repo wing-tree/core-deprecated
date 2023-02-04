@@ -3,32 +3,32 @@ package com.wing.tree.bruni.core.regular
 import android.view.View
 import com.wing.tree.bruni.core.extension.*
 
-fun enable(vararg view: View) {
-    view.forEach {
+fun enable(vararg views: View) {
+    views.forEach {
         it.enable()
     }
 }
 
-fun disable(vararg view: View) {
-    view.forEach {
+fun disable(vararg views: View) {
+    views.forEach {
         it.disable()
     }
 }
 
-fun visible(vararg view: View) {
-    view.forEach {
+fun visible(vararg views: View) {
+    views.forEach {
         it.visible()
     }
 }
 
-fun invisible(vararg view: View) {
-    view.forEach {
+fun invisible(vararg views: View) {
+    views.forEach {
         it.invisible()
     }
 }
 
-fun gone(vararg view: View) {
-    view.forEach {
+fun gone(vararg views: View) {
+    views.forEach {
         it.gone()
     }
 }

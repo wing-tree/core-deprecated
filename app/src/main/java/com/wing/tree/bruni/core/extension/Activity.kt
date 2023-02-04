@@ -7,8 +7,8 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 
-fun Activity.checkPermission(vararg permission: String): Boolean {
-    return permission.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
+fun Activity.checkPermission(vararg permissions: String): Boolean {
+    return permissions.all { checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
 }
 
 fun Activity.sharePlainText(text: CharSequence) {
@@ -20,8 +20,8 @@ fun Activity.sharePlainText(text: CharSequence) {
     startActivity(Intent.createChooser(intent, null))
 }
 
-fun Activity.shouldShowRequestPermissionRationale(vararg permission: String): Boolean {
-    return permission.any { shouldShowRequestPermissionRationale(it) }
+fun Activity.shouldShowRequestPermissionRationale(vararg permissions: String): Boolean {
+    return permissions.any { shouldShowRequestPermissionRationale(it) }
 }
 
 fun Activity.showToast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {

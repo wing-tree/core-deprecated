@@ -13,8 +13,8 @@ fun <T : Any> KClass<T>.getDeclaredField(name: String): Field =
         isAccessible = true
     }
 
-fun KClass<*>.getDeclaredFieldOrNull(vararg name: String): Field? {
-    name.forEach {
+fun KClass<*>.getDeclaredFieldOrNull(vararg names: String): Field? {
+    names.forEach {
         return try{
             getDeclaredField(it).apply {
                 isAccessible = true

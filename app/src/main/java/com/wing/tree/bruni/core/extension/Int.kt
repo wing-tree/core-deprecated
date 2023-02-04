@@ -10,16 +10,16 @@ val Int.hundreds: Int get() = times(ONE_HUNDRED)
 val Int.isEven: Boolean get() = rem(TWO) == ZERO
 val Int.isOdd: Boolean get() = isEven.not()
 val Int.isNegative: Boolean get() = this < ZERO
+val Int.isNotNegative: Boolean get() = this >= ZERO
+val Int.isNotPositive: Boolean get() = this <= ZERO
 val Int.isPositive: Boolean get() = this > ZERO
 val Int.negative get() = -this
-val Int.notNegative: Boolean get() = this >= ZERO
-val Int.notPositive: Boolean get() = this <= ZERO
 val Int.quarter get() = div(FOUR)
 val Int.thousands: Int get() = times(ONE_THOUSAND)
 
+val Int?.isNotZero: Boolean get() = isZero.not()
 val Int?.isOne: Boolean get() = this == ONE
 val Int?.isZero: Boolean get() = this == ZERO
-val Int?.notZero: Boolean get() = isZero.not()
 
 val Int.dp
     get() = TypedValue.applyDimension(

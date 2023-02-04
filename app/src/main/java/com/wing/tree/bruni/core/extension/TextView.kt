@@ -19,7 +19,7 @@ import com.wing.tree.bruni.core.constant.*
 private const val TAG = "TextView"
 
 private fun TextView.lineCount(text: CharSequence, textSize: Float, lineCount: Int = ONE): Int {
-    if (width.notPositive) {
+    if (width.isNotPositive) {
         return ONE
     }
 

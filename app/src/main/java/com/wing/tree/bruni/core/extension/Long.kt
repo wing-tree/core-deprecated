@@ -6,15 +6,15 @@ val Long.half get() = div(TWO.long)
 val Long.hundreds: Long get() = times(ONE_HUNDRED.long)
 val Long.int get() = toInt()
 val Long.isNegative: Boolean get() = this < ZERO.long
+val Long.isNotNegative: Boolean get() = this >= ZERO.long
+val Long.isNotPositive: Boolean get() = this <= ZERO.long
 val Long.isPositive: Boolean get() = this > ZERO.long
 val Long.negative get() = -this
-val Long.notNegative: Boolean get() = this >= ZERO.long
-val Long.notPositive: Boolean get() = this <= ZERO.long
 val Long.quarter get() = div(FOUR.long)
 val Long.thousands: Long get() = times(ONE_THOUSAND.long)
 
+val Long?.isNotZero: Boolean get() = isZero.not()
 val Long?.isZero: Boolean get() = this == ZERO.long
-val Long?.notZero: Boolean get() = isZero.not()
 
 fun Long.safeDiv(other: Float): Float {
     return if (other.isZero) {
