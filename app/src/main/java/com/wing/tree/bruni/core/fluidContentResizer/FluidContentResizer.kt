@@ -1,5 +1,6 @@
 package com.wing.tree.bruni.core.fluidContentResizer
 
+import android.animation.Animator.AnimatorListener
 import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
@@ -9,7 +10,8 @@ import com.wing.tree.bruni.core.extension.updateHeight
 
 class FluidContentResizer(
     private val duration: Long = DURATION,
-    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator()
+    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator(),
+    private val listener: AnimatorListener? = null
 ) {
     private var valueAnimator: ValueAnimator? = null
 
@@ -47,9 +49,11 @@ class FluidContentResizer(
         valueAnimator = ObjectAnimator.ofInt(
             previousContentHeight,
             currentContentHeight
-        ).apply {
-            duration = this@FluidContentResizer.duration
-            interpolator = this@FluidContentResizer.interpolator
+        ).also {
+            it.addListener(listener)
+
+            it.duration = duration
+            it.interpolator = interpolator
         }
 
         valueAnimator?.let { valueAnimator ->
