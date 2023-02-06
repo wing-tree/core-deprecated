@@ -1,7 +1,6 @@
 package com.wing.tree.bruni.core.fluidContentResizer
 
 import android.animation.*
-import android.animation.Animator.AnimatorListener
 import android.app.Activity
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.wing.tree.bruni.core.extension.updateHeight
@@ -14,20 +13,13 @@ class FluidContentResizer(
 
     fun registerActivity(
         activity: Activity,
-        onInputMethodVisibilityChanged: ((InputMethodVisibilityChangedEvent) -> Unit)? = null,
-        withStartAction: ((InputMethodVisibilityChangedEvent) -> Unit)? = null,
-        withEndAction: ((InputMethodVisibilityChangedEvent) -> Unit)? = null
+        onInputMethodVisibilityChanged: ((InputMethodVisibilityChangedEvent) -> Unit)? = null
     ) {
         val activityViewHolder = ActivityViewHolder.from(activity)
 
         InputMethodVisibilityDetector.setOnInputMethodVisibilityChangedListener(activityViewHolder) {
             onInputMethodVisibilityChanged?.invoke(it)
-            animate(
-                activityViewHolder,
-                it,
-                withStartAction,
-                withEndAction
-            )
+            animate(activityViewHolder, it)
         }
 
         activityViewHolder.setOnDetachedListener {
@@ -40,14 +32,11 @@ class FluidContentResizer(
 
     private fun animate(
         activityViewHolder: ActivityViewHolder,
-        inputMethodVisibilityChangedEvent: InputMethodVisibilityChangedEvent,
-        withStartAction: ((InputMethodVisibilityChangedEvent) -> Unit)? = null,
-        withEndAction: ((InputMethodVisibilityChangedEvent) -> Unit)? = null
+        inputMethodVisibilityChangedEvent: InputMethodVisibilityChangedEvent
     ) {
         val content = activityViewHolder.content
         val currentContentHeight = inputMethodVisibilityChangedEvent.currentContentHeight
         val previousContentHeight = inputMethodVisibilityChangedEvent.previousContentHeight
-
 
         content.updateHeight(previousContentHeight)
 
@@ -58,18 +47,6 @@ class FluidContentResizer(
             previousContentHeight,
             currentContentHeight
         ).also {
-            it.addListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        withEndAction?.invoke(inputMethodVisibilityChangedEvent)
-                    }
-
-                    override fun onAnimationStart(animation: Animator) {
-                        withStartAction?.invoke(inputMethodVisibilityChangedEvent)
-                    }
-                }
-            )
-
             it.duration = duration
             it.interpolator = interpolator
         }
