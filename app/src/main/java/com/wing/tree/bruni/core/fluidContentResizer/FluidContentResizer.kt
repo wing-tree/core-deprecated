@@ -10,20 +10,20 @@ import com.wing.tree.bruni.core.extension.updateHeight
 
 class FluidContentResizer(
     private val duration: Long = DURATION,
-    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator(),
-    private val listener: AnimatorListener? = null
+    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator()
 ) {
     private var valueAnimator: ValueAnimator? = null
 
     fun registerActivity(
         activity: Activity,
-        onInputMethodVisibilityChanged: ((InputMethodVisibilityChangedEvent) -> Unit)? = null
+        onInputMethodVisibilityChanged: ((InputMethodVisibilityChangedEvent) -> Unit)? = null,
+        listener: AnimatorListener? = null
     ) {
         val activityViewHolder = ActivityViewHolder.from(activity)
 
         InputMethodVisibilityDetector.setOnInputMethodVisibilityChangedListener(activityViewHolder) {
             onInputMethodVisibilityChanged?.invoke(it)
-            animate(activityViewHolder, it)
+            animate(activityViewHolder, it, listener)
         }
 
         activityViewHolder.setOnDetachedListener {
@@ -36,7 +36,8 @@ class FluidContentResizer(
 
     private fun animate(
         activityViewHolder: ActivityViewHolder,
-        inputMethodVisibilityChangedEvent: InputMethodVisibilityChangedEvent
+        inputMethodVisibilityChangedEvent: InputMethodVisibilityChangedEvent,
+        listener: AnimatorListener? = null
     ) {
         val content = activityViewHolder.content
         val currentContentHeight = inputMethodVisibilityChangedEvent.currentContentHeight
