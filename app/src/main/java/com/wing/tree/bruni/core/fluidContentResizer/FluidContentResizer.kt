@@ -2,13 +2,9 @@ package com.wing.tree.bruni.core.fluidContentResizer
 
 import android.animation.*
 import android.app.Activity
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.wing.tree.bruni.core.extension.updateHeight
 
-class FluidContentResizer(
-    private val duration: Long = DURATION,
-    private val interpolator: TimeInterpolator = FastOutSlowInInterpolator()
-) {
+class FluidContentResizer {
     private var valueAnimator: ValueAnimator? = null
 
     fun registerActivity(
@@ -46,10 +42,7 @@ class FluidContentResizer(
         valueAnimator = ObjectAnimator.ofInt(
             previousContentHeight,
             currentContentHeight
-        ).also {
-            it.duration = duration
-            it.interpolator = interpolator
-        }
+        )
 
         valueAnimator?.let { valueAnimator ->
             valueAnimator.addUpdateListener {
@@ -62,9 +55,5 @@ class FluidContentResizer(
 
             valueAnimator.start()
         }
-    }
-
-    companion object {
-        const val DURATION = 300L
     }
 }
