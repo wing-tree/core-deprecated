@@ -17,7 +17,7 @@ class DeferredWindowInsetsAnimationCallback :
     private var v: View? = null
     private var windowInsets: WindowInsetsCompat? = null
 
-    private var isDeferring = false
+    private var isDeferred = false
 
     override fun onApplyWindowInsets(
         v: View,
@@ -27,7 +27,7 @@ class DeferredWindowInsetsAnimationCallback :
         this.windowInsets = windowInsets
 
         val typeMask = when {
-            isDeferring -> systemBars
+            isDeferred -> systemBars
             else -> ime or systemBars
         }
 
@@ -40,7 +40,7 @@ class DeferredWindowInsetsAnimationCallback :
 
     override fun onPrepare(animation: WindowInsetsAnimationCompat) {
         if (animation.isTypeMasked(ime)) {
-            isDeferring = true
+            isDeferred = true
         }
     }
 
@@ -52,8 +52,8 @@ class DeferredWindowInsetsAnimationCallback :
     }
 
     override fun onEnd(animation: WindowInsetsAnimationCompat) {
-        if (isDeferring.and(animation.isTypeMasked(ime))) {
-            isDeferring = false
+        if (isDeferred.and(animation.isTypeMasked(ime))) {
+            isDeferred = false
 
             val v = v ?: return
             val windowInsets = windowInsets ?: return
