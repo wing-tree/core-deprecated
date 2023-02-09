@@ -46,8 +46,8 @@ fun View.gone() {
 }
 
 fun View.collapseVertically(
-    value: Int,
     duration: Long,
+    value: Int,
     interpolator: TimeInterpolator = LinearInterpolator(),
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -97,7 +97,6 @@ fun View.collapseVertically(
 fun View.collapseVertically(
     duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
-    fadeOut: Boolean = true,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -110,20 +109,12 @@ fun View.collapseVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            if (fadeOut) {
-                alpha = ZERO.float
-            }
-
             layoutParams.height = ZERO
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            if (fadeOut) {
-                alpha = ZERO.float
-            }
-
             layoutParams.height = ZERO
 
             onAnimationCancel?.invoke(animation)
@@ -140,10 +131,6 @@ fun View.collapseVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                if (fadeOut) {
-                    alpha = animatedValue.safeDiv(measuredHeight.float)
-                }
-
                 layoutParams.height = animatedValue
 
                 requestLayout()
@@ -184,10 +171,9 @@ fun View.crossFade(
 }
 
 fun View.expandVertically(
-    value: Int,
     duration: Long,
+    value: Int,
     interpolator: TimeInterpolator = LinearInterpolator(),
-    fadeIn: Boolean = true,
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
     onAnimationCancel: ((animation: Animator) -> Unit)? = null,
@@ -201,20 +187,12 @@ fun View.expandVertically(
         }
 
         override fun onAnimationEnd(animation: Animator) {
-            if (fadeIn) {
-                alpha = ONE.float
-            }
-
             layoutParams.height = value
 
             onAnimationEnd?.invoke(animation)
         }
 
         override fun onAnimationCancel(animation: Animator) {
-            if (fadeIn) {
-                alpha = ONE.float
-            }
-
             layoutParams.height = value
 
             onAnimationCancel?.invoke(animation)
@@ -231,10 +209,6 @@ fun View.expandVertically(
             val animatedValue = it.animatedValue
 
             if (animatedValue is Int) {
-                if (fadeIn) {
-                    alpha = animatedValue.safeDiv(value.float)
-                }
-
                 layoutParams.height = animatedValue
 
                 requestLayout()
