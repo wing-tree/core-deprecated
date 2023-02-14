@@ -18,6 +18,7 @@ val View.displayHeight: Int get() = context.displayHeight
 val View.displayMetrics: DisplayMetrics get() = resources.displayMetrics
 val View.density: Float get() = displayMetrics.density
 val View.densityDpi: Int get() = displayMetrics.densityDpi
+val View.navigationBarHeight: Int get() = context.navigationBarHeight
 val View.scaledDensity: Float get() = displayMetrics.scaledDensity
 
 val View.isGone: Boolean get() = visibility == View.GONE
