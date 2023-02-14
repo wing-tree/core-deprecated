@@ -17,7 +17,11 @@ val Resources.configShowNavigationBar: Boolean get() = run {
         "android"
     )
 
-    getBoolean(identifier)
+    if (identifier.isPositive) {
+        getBoolean(identifier)
+    } else {
+        false
+    }
 }
 
 val Resources.navigationBarHeight: Int get() = run {
