@@ -11,8 +11,12 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.TypedArray
 import android.os.Build
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
+import android.view.WindowInsets
+import android.view.WindowManager
+import android.view.WindowMetrics
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import androidx.annotation.*
@@ -110,6 +114,32 @@ val Context.decelerateQuadInterpolator: Interpolator
 
 val Context.decelerateQuintInterpolator: Interpolator
     get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_quint)
+
+val Context.displayHeight: Int
+    get() = run {
+        val windowManager = getSystemService(WindowManager::class.java)
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val currentWindowMetrics = windowManager.currentWindowMetrics
+            val typeMask = WindowInsets.Type.displayCutout()
+                .or(WindowInsets.Type.systemBars())
+            val windowInsets = currentWindowMetrics.windowInsets
+            val insets = windowInsets.getInsetsIgnoringVisibility(typeMask)
+
+            currentWindowMetrics
+                .bounds
+                .height()
+                .minus(insets.top)
+                .minus(insets.bottom)
+        } else {
+            val displayMetrics = DisplayMetrics()
+
+            @Suppress("DEPRECATION")
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            displayMetrics.heightPixels
+        }
+    }
 
 val Context.packageInfo: PackageInfo get() = with(packageManager) {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
