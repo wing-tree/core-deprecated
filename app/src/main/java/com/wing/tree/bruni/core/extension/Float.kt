@@ -5,6 +5,12 @@ import android.content.res.Resources
 import android.util.TypedValue
 import com.wing.tree.bruni.core.constant.*
 
+val Float.complement: Float get() = run {
+    require(this in ZERO.float..ONE.float)
+
+    ONE.minus(this)
+}
+
 val Float.half: Float get() = div(TWO.float)
 val Float.hundreds: Float get() = times(ONE_HUNDRED.float)
 val Float.isNegative: Boolean get() = this < ZERO.float
