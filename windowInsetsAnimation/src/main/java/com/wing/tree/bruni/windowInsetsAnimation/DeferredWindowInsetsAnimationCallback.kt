@@ -5,15 +5,14 @@ import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsCompat.Type.ime
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import com.wing.tree.bruni.windowInsetsAnimation.extension.isTypeMasked
 
 class DeferredWindowInsetsAnimationCallback :
     WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE),
     OnApplyWindowInsetsListener
 {
-    private val ime = WindowInsetsCompat.Type.ime()
-    private val systemBars = WindowInsetsCompat.Type.systemBars()
-
     private var v: View? = null
     private var windowInsets: WindowInsetsCompat? = null
 
@@ -27,8 +26,8 @@ class DeferredWindowInsetsAnimationCallback :
         this.windowInsets = windowInsets
 
         val typeMask = when {
-            isDeferred -> systemBars
-            else -> ime or systemBars
+            isDeferred -> systemBars()
+            else -> ime() or systemBars()
         }
 
         with(windowInsets.getInsets(typeMask)) {
@@ -39,7 +38,7 @@ class DeferredWindowInsetsAnimationCallback :
     }
 
     override fun onPrepare(animation: WindowInsetsAnimationCompat) {
-        if (animation.isTypeMasked(ime)) {
+        if (animation.isTypeMasked(ime())) {
             isDeferred = true
         }
     }
@@ -52,7 +51,7 @@ class DeferredWindowInsetsAnimationCallback :
     }
 
     override fun onEnd(animation: WindowInsetsAnimationCompat) {
-        if (isDeferred.and(animation.isTypeMasked(ime))) {
+        if (isDeferred.and(animation.isTypeMasked(ime()))) {
             isDeferred = false
 
             val v = v ?: return
