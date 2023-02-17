@@ -5,6 +5,7 @@ import android.animation.Animator.AnimatorListener
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.util.DisplayMetrics
+import android.util.Size
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
@@ -14,8 +15,8 @@ import androidx.core.view.updateLayoutParams
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
 
-val View.displayHeight: Int get() = context.displayHeight
 val View.displayMetrics: DisplayMetrics get() = resources.displayMetrics
+val View.displaySize: Size get() = context.displaySize
 val View.density: Float get() = displayMetrics.density
 val View.densityDpi: Int get() = displayMetrics.densityDpi
 val View.navigationBarHeight: Int get() = context.navigationBarHeight

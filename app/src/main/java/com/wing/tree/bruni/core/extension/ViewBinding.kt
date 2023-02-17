@@ -2,6 +2,7 @@ package com.wing.tree.bruni.core.extension
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.Size
 import android.view.animation.AnimationUtils
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
@@ -15,7 +16,7 @@ val ViewBinding.configShortAnimTime: Int get() = resources.getInteger(android.R.
 val ViewBinding.configMediumAnimTime: Int get() = resources.getInteger(android.R.integer.config_mediumAnimTime)
 val ViewBinding.configLongAnimTime: Int get() = resources.getInteger(android.R.integer.config_longAnimTime)
 
-val ViewBinding.displayHeight: Int get() = context.displayHeight
+val ViewBinding.displaySize: Size get() = context.displaySize
 val ViewBinding.navigationBarHeight: Int get() = context.navigationBarHeight
 
 fun ViewBinding.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(context, id)
