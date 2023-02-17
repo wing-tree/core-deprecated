@@ -13,10 +13,10 @@ import android.content.res.TypedArray
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Size
 import android.util.TypedValue
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.view.WindowMetrics
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import androidx.annotation.*
@@ -115,7 +115,7 @@ val Context.decelerateQuadInterpolator: Interpolator
 val Context.decelerateQuintInterpolator: Interpolator
     get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_quint)
 
-val Context.displayHeight: Int
+val Context.displaySize: Size
     get() = run {
         val windowManager = getSystemService(WindowManager::class.java)
 
@@ -131,13 +131,29 @@ val Context.displayHeight: Int
                 .height()
                 .minus(insets.top)
                 .minus(insets.bottom)
+
+            with(currentWindowMetrics.bounds) {
+                val width = width()
+                    .minus(insets.left)
+                    .minus(insets.right)
+
+                val height = height()
+                    .minus(insets.top)
+                    .minus(insets.bottom)
+
+                Size(width, height)
+            }
+
+            Size(1, 1)
         } else {
             val displayMetrics = DisplayMetrics()
 
             @Suppress("DEPRECATION")
             windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-            displayMetrics.heightPixels
+            with(displayMetrics) {
+                Size(widthPixels, heightPixels)
+            }
         }
     }
 
