@@ -421,14 +421,14 @@ fun View.translateUp(
         .withEndAction(withEndAction)
 }
 
-fun View.updateHeight(height: Int) {
+inline fun View.updateWidth(function: (Int) -> Int) {
     updateLayoutParams<ViewGroup.LayoutParams> {
-        this.height = height
+        width = function(width)
     }
 }
 
-fun View.updateWidth(width: Int) {
+inline fun View.updateHeight(function: (Int) -> Int) {
     updateLayoutParams<ViewGroup.LayoutParams> {
-        this.width = width
+        height = function(height)
     }
 }
