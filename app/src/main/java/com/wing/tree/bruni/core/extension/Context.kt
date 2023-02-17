@@ -126,12 +126,6 @@ val Context.displaySize: Size
             val windowInsets = currentWindowMetrics.windowInsets
             val insets = windowInsets.getInsetsIgnoringVisibility(typeMask)
 
-            currentWindowMetrics
-                .bounds
-                .height()
-                .minus(insets.top)
-                .minus(insets.bottom)
-
             with(currentWindowMetrics.bounds) {
                 val width = width()
                     .minus(insets.left)
@@ -143,8 +137,6 @@ val Context.displaySize: Size
 
                 Size(width, height)
             }
-
-            Size(1, 1)
         } else {
             val displayMetrics = DisplayMetrics()
 
