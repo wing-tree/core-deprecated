@@ -49,8 +49,8 @@ fun View.gone() {
 }
 
 fun View.collapseVertically(
-    duration: Long,
     value: Int,
+    duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -174,8 +174,8 @@ fun View.crossFade(
 }
 
 fun View.expandVertically(
-    duration: Long,
     value: Int,
+    duration: Long,
     interpolator: TimeInterpolator = LinearInterpolator(),
     onAnimationStart: ((animation: Animator) -> Unit)? = null,
     onAnimationEnd: ((animation: Animator) -> Unit)? = null,
@@ -254,8 +254,8 @@ fun View.fadeOut(
 }
 
 fun View.rotate(
-    duration: Long,
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
@@ -270,8 +270,8 @@ fun View.rotate(
 }
 
 fun View.rotateX(
-    duration: Long,
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
@@ -286,8 +286,8 @@ fun View.rotateX(
 }
 
 fun View.rotateY(
-    duration: Long,
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
@@ -301,9 +301,9 @@ fun View.rotateY(
         .withLayer()
 }
 
-fun View.translateDown(
-    duration: Long,
+fun View.translateY(
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
@@ -315,9 +315,9 @@ fun View.translateDown(
         .withLayer()
 }
 
-fun View.translateDown(
-    duration: Long,
+fun View.translateY(
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
@@ -331,39 +331,9 @@ fun View.translateDown(
         .withEndAction(withEndAction)
 }
 
-fun View.translateLeft(
-    duration: Long,
+fun View.translateX(
     value: Float,
-    interpolator: TimeInterpolator? = null,
-    listener: AnimatorListener? = null
-): ViewPropertyAnimator {
-    return animate()
-        .setDuration(duration)
-        .setInterpolator(interpolator)
-        .setListener(listener)
-        .translationX(value.negative)
-        .withLayer()
-}
-
-fun View.translateLeft(
     duration: Long,
-    value: Float,
-    interpolator: TimeInterpolator? = null,
-    withStartAction: Runnable? = null,
-    withEndAction: Runnable? = null
-): ViewPropertyAnimator {
-    return animate()
-        .setDuration(duration)
-        .setInterpolator(interpolator)
-        .translationX(value.negative)
-        .withLayer()
-        .withStartAction(withStartAction)
-        .withEndAction(withEndAction)
-}
-
-fun View.translateRight(
-    duration: Long,
-    value: Float,
     interpolator: TimeInterpolator? = null,
     listener: AnimatorListener? = null
 ): ViewPropertyAnimator {
@@ -375,9 +345,9 @@ fun View.translateRight(
         .withLayer()
 }
 
-fun View.translateRight(
-    duration: Long,
+fun View.translateX(
     value: Float,
+    duration: Long,
     interpolator: TimeInterpolator? = null,
     withStartAction: Runnable? = null,
     withEndAction: Runnable? = null
@@ -386,36 +356,6 @@ fun View.translateRight(
         .setDuration(duration)
         .setInterpolator(interpolator)
         .translationX(value)
-        .withLayer()
-        .withStartAction(withStartAction)
-        .withEndAction(withEndAction)
-}
-
-fun View.translateUp(
-    duration: Long,
-    value: Float,
-    interpolator: TimeInterpolator? = null,
-    listener: AnimatorListener? = null
-): ViewPropertyAnimator {
-    return animate()
-        .setDuration(duration)
-        .setInterpolator(interpolator)
-        .setListener(listener)
-        .translationY(value.negative)
-        .withLayer()
-}
-
-fun View.translateUp(
-    duration: Long,
-    value: Float,
-    interpolator: TimeInterpolator? = null,
-    withStartAction: Runnable? = null,
-    withEndAction: Runnable? = null
-): ViewPropertyAnimator {
-    return animate()
-        .setDuration(duration)
-        .setInterpolator(interpolator)
-        .translationY(value.negative)
         .withLayer()
         .withStartAction(withStartAction)
         .withEndAction(withEndAction)
