@@ -168,10 +168,12 @@ val Context.versionName: String get() = try {
 }
 
 fun Context.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(this, id)
+fun Context.boolean(@BoolRes id: Int) = resources.getBoolean(id)
 fun Context.dimen(@DimenRes id: Int) = resources.getDimension(id)
 fun Context.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
 fun Context.font(@FontRes id: Int) = ResourcesCompat.getFont(this, id)
 fun Context.integer(@IntegerRes id: Int) = resources.getInteger(id)
+fun Context.string(@StringRes id: Int) = resources.getString(id)
 
 fun Context.copyPlainTextToClipboard(text: CharSequence) {
     val clipboardManager = getSystemService(ClipboardManager::class.java)

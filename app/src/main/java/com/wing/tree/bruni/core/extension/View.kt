@@ -9,7 +9,10 @@ import android.util.Size
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
+import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import androidx.annotation.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.wing.tree.bruni.core.constant.ONE
@@ -47,6 +50,14 @@ fun View.invisible() {
 fun View.gone() {
     visibility = View.GONE
 }
+
+fun View.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(context, id)
+fun View.boolean(@BoolRes id: Int) = resources.getBoolean(id)
+fun View.dimen(@DimenRes id: Int) = resources.getDimension(id)
+fun View.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
+fun View.font(@FontRes id: Int) = ResourcesCompat.getFont(context, id)
+fun View.integer(@IntegerRes id: Int) = resources.getInteger(id)
+fun View.string(@StringRes id: Int) = resources.getString(id)
 
 fun View.collapseVertically(
     value: Int,
