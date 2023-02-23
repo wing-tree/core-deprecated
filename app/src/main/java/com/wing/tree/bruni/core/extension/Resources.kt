@@ -43,7 +43,9 @@ val Resources.navigationBarHeight: Int get() = run {
     }
 }
 
-
+fun Resources.boolean(@BoolRes id: Int) = getBoolean(id)
 fun Resources.dimen(@DimenRes id: Int) = getDimension(id)
 fun Resources.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(this, id, null)
+fun Resources.float(@DimenRes id: Int) = ResourcesCompat.getFloat(this, id)
 fun Resources.integer(@IntegerRes id: Int) = getInteger(id)
+fun Resources.string(@StringRes id: Int) = getString(id)

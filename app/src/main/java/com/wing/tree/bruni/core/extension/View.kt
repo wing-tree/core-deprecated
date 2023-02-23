@@ -52,9 +52,10 @@ fun View.gone() {
 }
 
 fun View.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(context, id)
-fun View.boolean(@BoolRes id: Int) = resources.getBoolean(id)
-fun View.dimen(@DimenRes id: Int) = resources.getDimension(id)
-fun View.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
+fun View.boolean(@BoolRes id: Int) = resources.boolean(id)
+fun View.dimen(@DimenRes id: Int) = resources.dimen(id)
+fun View.drawable(@DrawableRes id: Int) = resources.drawable(id)
+fun View.float(@DimenRes id: Int) = resources.float(id)
 fun View.font(@FontRes id: Int) = ResourcesCompat.getFont(context, id)
 fun View.integer(@IntegerRes id: Int) = resources.getInteger(id)
 fun View.string(@StringRes id: Int) = resources.getString(id)

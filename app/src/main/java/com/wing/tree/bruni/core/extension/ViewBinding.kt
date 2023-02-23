@@ -20,10 +20,13 @@ val ViewBinding.displaySize: Size get() = context.displaySize
 val ViewBinding.navigationBarHeight: Int get() = context.navigationBarHeight
 
 fun ViewBinding.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(context, id)
-fun ViewBinding.dimen(@DimenRes id: Int) = resources.getDimension(id)
-fun ViewBinding.drawable(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
+fun ViewBinding.boolean(@BoolRes id: Int) = resources.boolean(id)
+fun ViewBinding.dimen(@DimenRes id: Int) = resources.dimen(id)
+fun ViewBinding.drawable(@DrawableRes id: Int) = resources.drawable(id)
+fun ViewBinding.float(@DimenRes id: Int) = resources.float(id)
 fun ViewBinding.font(@FontRes id: Int) = ResourcesCompat.getFont(context, id)
-fun ViewBinding.integer(@IntegerRes id: Int) = resources.getInteger(id)
+fun ViewBinding.integer(@IntegerRes id: Int) = resources.integer(id)
+fun ViewBinding.string(@StringRes id: Int) = resources.string(id)
 
 fun ViewDataBinding.post(action: Runnable) {
     root.post(action)
