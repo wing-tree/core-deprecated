@@ -19,11 +19,11 @@ import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
 
 val View.displayMetrics: DisplayMetrics get() = resources.displayMetrics
-val View.displaySize: Size get() = context.displaySize
 val View.density: Float get() = displayMetrics.density
 val View.densityDpi: Int get() = displayMetrics.densityDpi
 val View.navigationBarHeight: Int get() = context.navigationBarHeight
 val View.scaledDensity: Float get() = displayMetrics.scaledDensity
+val View.screenSize: Size get() = context.screenSize
 
 val View.isGone: Boolean get() = visibility == View.GONE
 val View.isInvisible: Boolean get() = visibility == View.INVISIBLE

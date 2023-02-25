@@ -16,8 +16,8 @@ val ViewBinding.configShortAnimTime: Int get() = resources.getInteger(android.R.
 val ViewBinding.configMediumAnimTime: Int get() = resources.getInteger(android.R.integer.config_mediumAnimTime)
 val ViewBinding.configLongAnimTime: Int get() = resources.getInteger(android.R.integer.config_longAnimTime)
 
-val ViewBinding.displaySize: Size get() = context.displaySize
 val ViewBinding.navigationBarHeight: Int get() = context.navigationBarHeight
+val ViewBinding.screenSize: Size get() = context.screenSize
 
 fun ViewBinding.anim(@AnimRes id: Int) = AnimationUtils.loadAnimation(context, id)
 fun ViewBinding.boolean(@BoolRes id: Int) = resources.boolean(id)

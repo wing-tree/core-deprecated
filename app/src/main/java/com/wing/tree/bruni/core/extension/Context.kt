@@ -115,7 +115,18 @@ val Context.decelerateQuadInterpolator: Interpolator
 val Context.decelerateQuintInterpolator: Interpolator
     get() = AnimationUtils.loadInterpolator(this, android.R.interpolator.decelerate_quint)
 
-val Context.displaySize: Size
+val Context.packageInfo: PackageInfo get() = with(packageManager) {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val flags = PackageManager.PackageInfoFlags.of(ZERO.long)
+
+        getPackageInfo(packageName, flags)
+    } else {
+        @Suppress("DEPRECATION")
+        getPackageInfo(packageName, ZERO)
+    }
+}
+
+val Context.screenSize: Size
     get() = run {
         val windowManager = getSystemService(WindowManager::class.java)
 
@@ -148,17 +159,6 @@ val Context.displaySize: Size
             }
         }
     }
-
-val Context.packageInfo: PackageInfo get() = with(packageManager) {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val flags = PackageManager.PackageInfoFlags.of(ZERO.long)
-
-        getPackageInfo(packageName, flags)
-    } else {
-        @Suppress("DEPRECATION")
-        getPackageInfo(packageName, ZERO)
-    }
-}
 
 val Context.versionName: String get() = try {
     packageInfo.versionName
