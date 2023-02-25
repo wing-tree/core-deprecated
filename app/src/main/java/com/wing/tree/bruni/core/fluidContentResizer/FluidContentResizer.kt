@@ -34,7 +34,9 @@ class FluidContentResizer {
         val currentContentHeight = inputMethodVisibilityChangedEvent.currentContentHeight
         val previousContentHeight = inputMethodVisibilityChangedEvent.previousContentHeight
 
-        content.updateHeight(previousContentHeight)
+        content.updateHeight {
+            previousContentHeight
+        }
 
         valueAnimator?.cancel()
         valueAnimator?.removeAllUpdateListeners()
@@ -48,7 +50,9 @@ class FluidContentResizer {
             valueAnimator.addUpdateListener {
                 with(it.animatedValue) {
                     if (this is Int) {
-                        content.updateHeight(this)
+                        content.updateHeight {
+                            this
+                        }
                     }
                 }
             }
