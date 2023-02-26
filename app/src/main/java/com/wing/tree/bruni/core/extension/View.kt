@@ -18,6 +18,7 @@ import androidx.core.view.updateLayoutParams
 import com.wing.tree.bruni.core.constant.ONE
 import com.wing.tree.bruni.core.constant.ZERO
 
+val View.actionBarSize: Int get() = context.actionBarSize
 val View.displayMetrics: DisplayMetrics get() = resources.displayMetrics
 val View.density: Float get() = displayMetrics.density
 val View.densityDpi: Int get() = displayMetrics.densityDpi
