@@ -15,6 +15,7 @@ val Double.isNotNegative: Boolean get() = this >= ZERO.double
 val Double.isNotPositive: Boolean get() = this <= ZERO.double
 val Double.isPositive: Boolean get() = this > ZERO.double
 val Double.negative: Double get() = -this
+val Double.reciprocal get() = ONE.double.div(this)
 val Double.quarter get() = div(FOUR.double)
 val Double.thousands: Double get() = times(ONE_THOUSAND.double)
 

@@ -19,6 +19,7 @@ val Float.isNotPositive: Boolean get() = this <= ZERO.float
 val Float.isPositive: Boolean get() = this > ZERO.float
 val Float.negative: Float get() = -this
 val Float.quarter get() = div(FOUR.float)
+val Float.reciprocal get() = ONE.float.div(this)
 val Float.thousands: Float get() = times(ONE_THOUSAND.float)
 
 val Float.dp: Float

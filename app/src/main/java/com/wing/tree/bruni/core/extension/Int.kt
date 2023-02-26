@@ -14,6 +14,7 @@ val Int.isNotNegative: Boolean get() = this >= ZERO
 val Int.isNotPositive: Boolean get() = this <= ZERO
 val Int.isPositive: Boolean get() = this > ZERO
 val Int.negative get() = -this
+val Int.reciprocal: Float get() = ONE.float.div(this)
 val Int.quarter get() = div(FOUR)
 val Int.thousands: Int get() = times(ONE_THOUSAND)
 
