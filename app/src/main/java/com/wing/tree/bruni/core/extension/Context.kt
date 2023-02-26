@@ -72,14 +72,15 @@ val Context.colorOnTertiary: Int @ColorInt get() = with(TypedValue()) {
     data
 }
 
-val Context.actionBarSize: Int get() = run {
-    val styledAttributes: TypedArray = theme.obtainStyledAttributes(
-        intArrayOf(android.R.attr.actionBarSize)
-    )
-
-    return styledAttributes.getDimension(ZERO, ZERO.float).also {
-        styledAttributes.recycle()
-    }.int
+val Context.actionBarSize: Int get() = with(TypedValue()) {
+    return if (theme.resolveAttribute(android.R.attr.actionBarSize, this, true)) {
+        TypedValue.complexToDimensionPixelSize(
+            data,
+            resources.displayMetrics
+        )
+    } else {
+        ZERO
+    }
 }
 
 val Context.colorSurface: Int
