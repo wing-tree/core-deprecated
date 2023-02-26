@@ -21,7 +21,6 @@ import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
-import com.wing.tree.bruni.core.R
 import com.wing.tree.bruni.core.constant.EMPTY
 import com.wing.tree.bruni.core.constant.ZERO
 
