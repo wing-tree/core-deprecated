@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
+import com.wing.tree.bruni.core.R
 import com.wing.tree.bruni.core.constant.EMPTY
 import com.wing.tree.bruni.core.constant.ZERO
 
@@ -28,7 +29,7 @@ private const val TAG = "Context"
 
 val Context.actionBarSize: Int get() = run {
     val styledAttributes: TypedArray = theme.obtainStyledAttributes(
-        intArrayOf(android.R.attr.actionBarSize)
+        intArrayOf(androidx.appcompat.R.attr.actionBarSize)
     )
 
     return styledAttributes.getDimension(ZERO, ZERO.float).also {
